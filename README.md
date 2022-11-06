@@ -1,6 +1,16 @@
-# WIP - howto - building a netops dashboard
+# WIP - NOD
 
-i needed to build some tooling for operating a network. my use-cases were:
+what is `NOD`:
+
+- Network Orchestration Director
+- Network Operations Dashboard
+- Network Operations Director
+- ???
+
+the definition is unclear, as this is currently an API for scraping the output of show commands from network devices
+in a nornir/gornir inventory, and returning JSON
+
+some potential use-cases:
 
 - network state report
   - interface utilization
@@ -54,12 +64,17 @@ which if you haven't read, i highly recommend. (*emphasis mine*):
 
 ### frontend
 
+tbd
+
 - jupyter notebook(s) for data analysis, reporting, and display
 
 ### backend
 
 - nornir + fastapi
 - gornir + net/http
+
+- builds [FastAPI](https://fastapi.tiangolo.com/)+[Nornir](https://nornir.readthedocs.io/en/latest/) backend
+- builds [net/http](https://pkg.go.dev/net/http)+[Gornir](https://github.com/nornir-automation/gornir/) backend
 
 [gornir](https://github.com/nornir-automation/gornir), augmented by [scrapligo](https://github.com/scrapli/scrapligo)
 
@@ -85,6 +100,26 @@ which if you haven't read, i highly recommend. (*emphasis mine*):
 
 ## build stuff
 
+### build instructions
+
+this project uses `make` and `containers`
+
+`make nod`
+
+- builds everything
+
+`make nodpy`
+
+- builds FastAPI+Nornir backend
+
+`make nodgo`
+
+- builds net/http+Gornir backend
+
+TODO `make nodfe`
+
+- builds the nod frontend
+
 the first components to build are the APIs, and their associated collectors.
 
 ### building the API
@@ -101,17 +136,22 @@ endpoints. to solve the initial use cases, the following endpoint are defined:
 #### Nornir and FastAPI
 
   ```py3
-  @app.get('/netstate')
-  async def read_network_state():
-    netstate = await collect_network_state()
-    return netstate
-  ```
+  @nod.get("/devices")
+  async def get_devices():
+      """Returns list of devices loaded from Nornir hosts.yml."""
+      with open("./inventories/nr/hosts.yml", encoding="utf-8") as hf:
+          devices = safe_load(hf)
+      return {"devices": devices}
 
-  ```py3
-  @app.get('/netstate/interfaces')
-  async def read_intf_state():
-    interfaces = await collect_intf_state()
-    return interfaces
+  @nod.get("/devices/{hostname}/napalm_get/{getter}")
+  async def get_config(hostname: str, getter: str):
+      """
+      Function used to interact with NAPALM-supported devices.
+
+      https://napalm.readthedocs.io/en/latest/support/#general-support-matrix
+      """
+      rtr = nr.filter(name=f"{hostname}")
+      return rtr.run(name=f"Get {hostname} {getter}", task=napalm_get, getters=[f"{getter}"])
   ```
 
 ## references/inspiration
