@@ -46,9 +46,6 @@ nodpy: ## build the FastAPI+Nornir container
 		-t "joshuaejs/nodpy:${VERSION}" \
 		-t "nodpy:latest" be/nr
 
-#		--build-arg NOD_UID=${UID} \
-#		--build-arg NOD_GID=${GID} \
-
 .PHONY: nodgo
 nodgo: ## build the net/http+Gornir container
 	@docker build --force-rm \

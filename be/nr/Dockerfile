@@ -49,20 +49,11 @@ RUN apt-get update -qq \
     python3-wheel \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# ENV DEFAULT_UID=1001
-# ENV DEFAULT_GID="${DEFAULT_UID}"
-# ARG NOD_UID
-# ARG NOD_GID
-# RUN test -n "${NOD_UID}" && test -n "${NOD_GID}"
-# ENV NOD_UID="${NOD_UID}"
 ENV NOD_UID=1000
 ENV NOD_GID="${NOD_UID}"
 
 COPY --from=builder /usr/local/venv /srv/nod
 
-# RUN if [ "$NOD_UID" = 0 ]; then NOD_UID=$DEFAULT_UID; fi \
-  # && if [ "$NOD_GID" = 0 ]; then NOD_GID=$DEFAULT_GID; fi \
-  # && addgroup --gid "${NOD_GID:-$DEFAULT_UID}" "${NOD_USER}" \
 RUN addgroup --gid "${NOD_GID}" "${NOD_USER}" \
   && useradd --system \
     --shell /bin/bash \
