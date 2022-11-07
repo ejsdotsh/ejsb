@@ -9,7 +9,7 @@
 
 # But not these files...
 !/.gitignore
-!.gitkeep
+!/.gitkeep
 
 # all go
 !*.go
@@ -27,7 +27,7 @@
 
 !Makefile
 !Dockerfile
-!requirements.txt
+!nr-requirements.txt
 
 # ...even if they are in subdirectories
 !*/
