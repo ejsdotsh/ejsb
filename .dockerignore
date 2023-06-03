@@ -1,0 +1,6 @@
+# ignore everything
+# *
+**/logs
+**/__pycache__
+
+# !requirements.txt

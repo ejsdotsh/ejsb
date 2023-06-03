@@ -1,6 +1,0 @@
-nornir
-nornir_scrapli
-nornir_napalm
-nornir_utils
-fastapi
-uvicorn[standard]
