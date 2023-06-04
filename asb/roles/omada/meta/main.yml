@@ -1,0 +1,25 @@
+galaxy_info:
+  author: ejsdotsh
+  description: A basic role to manage tplink omada controllers.
+  company: ejsdotsh
+
+  license: Apache-2.0
+
+  min_ansible_version: "2.1"
+
+  platforms:
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+
+  galaxy_tags:
+    - system
+    - wifi
+    - omada
+    - tplink
+
+dependencies:
+  - role: global_handlers

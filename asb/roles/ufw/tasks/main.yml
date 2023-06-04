@@ -1,0 +1,51 @@
+---
+# tasks file for installing/configuring nftables with ufw
+
+- name: Include global handlers
+  ansible.builtin.include_role:
+    name: global_handlers
+
+- name: Minimal firewall setup
+  block:
+    - name: Ensure ufw is installed and updated
+      ansible.builtin.apt:
+        name: ufw
+        state: latest
+        update_cache: true
+
+    - name: Set default policy
+      community.general.ufw:
+        state: enabled
+        policy: deny
+
+    # TODO
+    # -name: Remove existing ruleset
+
+    - name: Ensure ssh is allowed and limited
+      community.general.ufw:
+        rule: limit
+        port: ssh
+        proto: tcp
+      notify:
+        - Restart ufw
+
+- name: Add allowed ports and protos
+  block:
+    - name: Add tcp rules
+      community.general.ufw:
+        rule: allow
+        proto: tcp
+        port: "{{ item }}"
+      loop: "{{ firewall_tcp_allowed }}"
+      when: firewall_tcp_allowed is defined
+
+    - name: Add udp rules
+      community.general.ufw:
+        rule: allow
+        proto: udp
+        port: "{{ item }}"
+      loop: "{{ firewall_udp_allowed }}"
+      when: firewall_udp_allowed is defined
+  notify:
+    - Restart UFW
+

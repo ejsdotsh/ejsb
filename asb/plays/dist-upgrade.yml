@@ -1,0 +1,65 @@
+---
+- name: Dist upgrade
+  hosts: apt_os_all
+  become: true
+  gather_facts: false
+
+  pre_tasks:
+    - name: Is a reboot required?
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+        get_md5: false
+      notify: Server reboot
+
+    - name: Reboot the host before moving on
+      ansible.builtin.meta: flush_handlers
+
+        #    - name: update sources.list
+        #      template:
+        #        src: "../templates/apt/{{ os_name }}.sources.list.j2"
+        #        dest: "/etc/apt/sources.list"
+        #        mode: 0644
+
+  tasks:
+    - name: Update cache and upgrade
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
+        force_apt_get: true
+
+    - name: Is a reboot required?
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+        get_md5: false
+      register: reboot_required
+      notify: Server reboot
+
+    - name: Run the reboot handler
+      ansible.builtin.meta: flush_handlers
+
+    - name: Update cache and do 'dist-upgrade' again if rebooted
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
+        force_apt_get: true
+      when: reboot_required
+
+    - name: Clean up
+      ansible.builtin.apt:
+        autoclean: true
+
+    - name: Remove unused packages
+      ansible.builtin.apt:
+        autoremove: true
+        purge: true
+
+  handlers:
+    - name: Server reboot
+      ansible.builtin.reboot:
+        msg: "the system is going down"
+        connect_timeout: 5
+        reboot_timeout: 600
+        pre_reboot_delay: 0
+        post_reboot_delay: 30
+        test_command: uptime
+      register: reboot_was_necessary

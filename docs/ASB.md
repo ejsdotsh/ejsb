@@ -1,4 +1,4 @@
-# system-builder - ansible
+# Ansible System Builder
 
 ## machines
 
@@ -10,7 +10,7 @@ builds and configures each `machine`
 
 ## my roles
 
-## ansible workflow
+## playbook overview
 
 - `provision.yml` imports `configure.yml` to provision and configure the given hosts
 
@@ -28,8 +28,7 @@ builds and configures each `machine`
 
 ## inventories and sources-of-truth
 
-the inventory is the `source-of-truth`, and for **reasons** it is ansible-like until i define yet another
-infrastructure data model (YAIDM?) and write the plugins to use it.
+the inventory is the `source-of-truth` and ansible-like until i define yet another infrastructure data model (YAIDM?) and write the plugins to use it.
 
 ## references and inspiration
 

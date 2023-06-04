@@ -1,0 +1,13 @@
+---
+# vars file for machines/nas
+zfs_pool_name: pool
+zfs_pool_mount: /pool
+
+docker_storage_driver: zfs
+docker_ipv6: no
+docker_ip4_net: "{{ docker_ip4_net }}"
+docker_ip6_net: ""
+
+omada_controller_name: "{{ ap_controller_name }}"
+omada_timezone: "{{ ap_timezone }}"
+

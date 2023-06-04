@@ -1,0 +1,11 @@
+---
+# import all of the handlers: order determines execution order
+
+#- import_tasks: "apt.yml"
+
+#- import_tasks: "hostname.yml"
+
+- import_tasks: "ufw.yml"
+- import_tasks: "docker.yml"
+
+- import_tasks: "nginx.yml"

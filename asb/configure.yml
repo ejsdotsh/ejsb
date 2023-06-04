@@ -1,0 +1,29 @@
+---
+# playbook to configure (newly) provisioned systems
+
+- name: Configure websites
+  ansible.builtin.import_playbook: machines/www/main.yml
+  tags:
+    - "configure::www"
+    - "configure::all"
+    - "never"
+
+- name: Run the NAS configuration playbooks.
+  ansible.builtin.import_playbook: machines/nas/main.yml
+  tags:
+    - "never"
+    - "configure::nas"
+
+# name: Run the db configuration playbooks.
+# ansible.builtin.import_playbook: machines/db/main.yml
+# tags:
+#   - "never"
+#   - "configure::db"
+
+# name: Run the dhcp configuration playbooks.
+# ansible.builtin.import_playbook: machines/dhcp/main.yml
+# tags:
+#   - "never"
+#   - "configure::dhcp"
+
+# code: language=ansible

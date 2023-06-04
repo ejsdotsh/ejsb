@@ -1,0 +1,21 @@
+---
+# tasks file for zfs
+
+- name: Manage filesystems
+  community.general.zfs:
+    name: "{{ item.pool }}/{{ item.name }}"
+    state: "{{ item.state }}"
+    extra_zfs_properties:
+      mountpoint: "{{ item.mountpoint|default(omit) }}"
+      recordsize: "{{ item.recordsize|default(omit) }}"
+  with_items: "{{ zfs_filesystems }}"
+  when: zfs_manage_filesystems is defined
+
+- name: Manage permissions
+  ansible.builtin.file:
+    path: "{{ item.mountpoint }}"
+    mode: "{{ item.mode|default(omit) }}"
+    owner: "{{ item.owner|default(omit) }}"
+    group: "{{ item.group|default(omit) }}"
+  with_items: "{{ zfs_filesystems }}"
+  when: zfs_manage_permissions is defined

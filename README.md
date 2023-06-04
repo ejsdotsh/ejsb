@@ -8,6 +8,13 @@
 
 **caution, this is a work in progress, breaking changes ahead...**
 
+## defining the API
+
+the API will collect *state* information from the network, transform it into JSON, and serve it over (RESTful?) HTTPS endpoints. to solve the initial use cases, the following endpoint are defined:
+
+- `/devices`
+- `/devices/{hostname}/napalm_get/{getter}`
+
 ## build instructions
 
 this project uses `make` and `containers`.
@@ -16,6 +23,17 @@ the first components to build are the APIs, and their associated collectors.
 
 - `make nrf` builds the Nornir + FastAPI container
 - `make grn` builds the Gornir + Net/HTTP container
+
+## potential future use-cases and features
+
+- dashboards and reporting
+  - status
+  - utilization
+  - standards compliance
+  - locate a host by mac-address or IP, return (optionally change) the configuration
+- configuration backup and version control
+- configuration changes and verification
+- jupyter notebook(s) for interactive data analysis, dashboards, training and documentation, ops playbooks, and reporting
 
 ## references/inspiration
 

@@ -1,0 +1,11 @@
+---
+- name: Update hosts
+  ansible.builtin.import_playbook: plays/dist-upgrade.yml
+  tags:
+    - never
+    - task::upgrade
+
+- name: Configuration playbook
+  ansible.builtin.import_playbook: configure.yml
+
+# code: language=ansible

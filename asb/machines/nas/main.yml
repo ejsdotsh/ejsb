@@ -1,0 +1,17 @@
+---
+- hosts: nas
+  become: true
+
+  vars_files:
+    - vars.yml
+
+  roles:
+    ## required
+    # TODO WIP - role: builder-base
+    - role: zfs
+    - role: ufw
+    # TODO WIP - role: docker
+
+    ## services
+    # TODO WIP - role: bind
+    - role: omada

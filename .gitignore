@@ -33,9 +33,9 @@ venv/
 !docs/**/*.md
 
 # track
-!ansible/**
+!asb/**
 # but don't track the ansible inventory here
-ansible/inventories/**
+asb/inventories/**
 
 # nrf
 !nrf/**
