@@ -1,0 +1,12 @@
+---
+# uncomment the provisioner to use
+#
+- import_playbook: provisioners/linode.yml
+
+# - name: Configure the provisioned servers
+  # ansible.builtin.import_playbook: configure.yml
+  # tags:
+    # - "configure::all"
+    # - "never"
+
+# code: language=ansible

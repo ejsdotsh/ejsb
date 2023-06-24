@@ -2,11 +2,11 @@
 
 (pronounced like `nerf`)
 
-an API written in Python using [Nornir](https://nornir.tech/nornir/) and [FastAPI](https://fastapi.tiangolo.com/) that (currently) scrapes the output of show commands from network devices in a [Nornir inventory](https://nornir.readthedocs.io/en/latest/tutorial/inventory.html), using [nornir_napalm's](https://github.com/nornir-automation/nornir_napalm) `get_*` methods, and returns the results as JSON.
+an API and command-line tool written in Python using [Nornir](https://nornir.tech/nornir/) and [FastAPI](https://fastapi.tiangolo.com/) that (currently) scrapes the output of show commands from network devices in a [Nornir inventory](https://nornir.readthedocs.io/en/latest/tutorial/inventory.html), using [nornir_napalm's](https://github.com/nornir-automation/nornir_napalm) `get_*` methods, and returns the results as JSON.
 
 > Nornir is a pure Python automation framework intented to be used directly from Python. While most automation frameworks use their own Domain Specific Language (DSL) which you use to describe what you want to have done, Nornir lets you control everything from Python.
 
-## example code
+## example code for supported API endpoints
 
   ```python
   @nrf.get("/devices")

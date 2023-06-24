@@ -1,0 +1,35 @@
+- hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Get Linode account info
+      linode.cloud.account_info:
+        api_token: "{{ vault.linode_api_token }}"
+      tags:
+        - "never"
+        - "linode::info"
+
+    - name: Create a linode instance
+      linode.cloud.instance:
+        api_token: "{{ vault.linode_api_token }}"
+        label: "{{ hostname | default('please-name-me') }}"
+        type: "{{ linode_instance_type | default('g6-nanode-1') }}"
+        region: "{{ linode_region | default('us-west') }}"
+        image: "linode/{{ linode_image | default('debian12') }}"
+        root_pass: "{{ vault.linode_root_pw }}"
+        authorized_keys:
+          - "{{ vault.admin_pub_sshkey }}"
+        state: present
+      tags:
+        - "never"
+        - "linode::provision"
+
+    - name: Delete a linode instance
+      linode.cloud.instance:
+        api_token: "{{ vault.linode_api_token }}"
+        label: "{{ hostname | default('please-name-me') }}"
+        state: absent
+      tags:
+        - "never"
+        - "linode::deprovision"

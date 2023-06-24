@@ -11,8 +11,9 @@
 - name: Run the NAS configuration playbooks.
   ansible.builtin.import_playbook: machines/nas/main.yml
   tags:
-    - "never"
     - "configure::nas"
+    - "configure::all"
+    - "never"
 
 # name: Run the db configuration playbooks.
 # ansible.builtin.import_playbook: machines/db/main.yml
@@ -27,3 +28,4 @@
 #   - "configure::dhcp"
 
 # code: language=ansible
+# vim: tw=120

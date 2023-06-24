@@ -36,6 +36,8 @@ venv/
 !asb/**
 # but don't track the ansible inventory here
 asb/inventories/**
+asb/.collections/**
+asb/.vp
 
 # nrf
 !nrf/**

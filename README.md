@@ -1,19 +1,49 @@
 # network development operations tooling setup (ndots)
 
-**`ndots`** is a collection of opinionated APIs and tooling that i've developed in my *homelab* to automate the build and management of infrastructure. this is as much about learning as it is about documenting what i've done and teaching/sharing knowledge.
+**`ndots`** is a collection of opinionated tooling and APIs that i've developed in my *homelab* to automate the build and management of (my personal) infrastructure.
+
+this project is as much about learning as it is about documenting what i've done and teaching/sharing knowledge.
+
+***...caution, this is a work in progress, breaking changes ahead...***
+
+## asb
 
 - [asb](asb) - Ansible Systems Builder
+  - what began solely as a personal fork of Ansible-NAS to replace FreeNAS, has been rewritten as systems administration tooling modeled after `Ansible for DevOps` and the `DebOps` project.
+
+## nrf and grn
+
 - [nrf](nrf) - Nornir + FastAPI
 - [grn](grn) - Gornir + Net/HTTP
 
-**caution, this is a work in progress, breaking changes ahead...**
+beginning with `nrf`, and then replicating to `grn`, they are both an API and a command-line tool.
 
-## defining the API
-
-the API will collect *state* information from the network, transform it into JSON, and serve it over (RESTful?) HTTPS endpoints. to solve the initial use cases, the following endpoint are defined:
+the initial API endpoints are:
 
 - `/devices`
-- `/devices/{hostname}/napalm_get/{getter}`
+  - returns a JSON list of all devices in the inventory
+- `/devices/{hostname}/getter/{getter}`
+  - returns the results of a supported `NAPALM` *getter*
+    - `facts`
+    - `config`
+    - `interfaces`
+    - please see [getters support matrix](https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix) for the complete list
+
+the same *getters* are also available from the command line:
+
+`$ ./nrf --hostname {{hostname}} --getter {{ (facts|config|interfaces) }}`
+
+### potential future use-cases and features
+
+- each API will asynchronously collect, and optionally store, *state* information from supported systems, transform it into JSON, and serve it to (RESTful?) HTTPS endpoints or CLI commands.
+- dashboards and reporting
+  - status
+  - utilization
+  - standards compliance
+  - locate a host by mac-address or IP, return (optionally change) the configuration
+- configuration backup and version control
+- configuration changes and verification
+- jupyter notebook(s) for interactive data analysis, dashboards, training and documentation, ops playbooks, and reporting
 
 ## build instructions
 
@@ -23,17 +53,6 @@ the first components to build are the APIs, and their associated collectors.
 
 - `make nrf` builds the Nornir + FastAPI container
 - `make grn` builds the Gornir + Net/HTTP container
-
-## potential future use-cases and features
-
-- dashboards and reporting
-  - status
-  - utilization
-  - standards compliance
-  - locate a host by mac-address or IP, return (optionally change) the configuration
-- configuration backup and version control
-- configuration changes and verification
-- jupyter notebook(s) for interactive data analysis, dashboards, training and documentation, ops playbooks, and reporting
 
 ## references/inspiration
 

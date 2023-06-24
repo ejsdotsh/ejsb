@@ -24,19 +24,11 @@ CURRENT_DIR := $(CURDIR)
 
 .PHONY: help
 help: ## display this help message
-	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make <target>\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  %-15s %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+	@awk 'BEGIN {FS = ":.*##"; printf "\n\033[1mUsage:\033[0m\n  make <target>\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  %-15s %s\n", $$1, $$2 } /^##@/ { printf "\n\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
 .PHONY: image-clean
 image-clean: ## maintenance command to remove intermediate containers
 	@docker rmi $$(docker images -f "dangling=true" -q)
-
-.PHONY: test
-test: ## shows the value of some variables
-	@echo ${VERSION}
-	@echo ${CURRENT_DIR}
-	@echo ${HOME}
-	@echo ${BUILD_DATE}
-	@echo $(MAKEFILE_LIST)
 
 
 ##@ Build
@@ -81,3 +73,18 @@ pydev: nrf ## build and attach to the FastAPI+Nornir container
 		--publish 8080:8080 \
 		-w /srv/nrf \
 		nrf bash
+
+
+##@ Testing
+
+.PHONY: testall
+testall: ## runs all defined tests
+	$(MAKE) test
+
+.PHONY: test
+test: ## shows the value of some variables
+	@echo ${VERSION}
+	@echo ${CURRENT_DIR}
+	@echo ${HOME}
+	@echo ${BUILD_DATE}
+	@echo $(MAKEFILE_LIST)

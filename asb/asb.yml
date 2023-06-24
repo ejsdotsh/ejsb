@@ -5,6 +5,9 @@
     - never
     - task::upgrade
 
+- name: Provisioning playbook
+  ansible.builtin.import_playbook: provision.yml
+
 - name: Configuration playbook
   ansible.builtin.import_playbook: configure.yml
 

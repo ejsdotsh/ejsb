@@ -1,14 +1,30 @@
 # Ansible System Builder
 
+what began solely as a personal fork of `Ansible-NAS` to replace `FreeNAS`, has been rewritten as systems administration tooling modeled after `Ansible for DevOps` and the `DebOps` project.
+
 ## machines
 
-builds and configures each `machine`
+a `machine` is a playbook to build and configure coupled functions and services on groups of hosts in an idempotent manner. where possible, `tasks` have been abstracted into `roles` for modularity and easier reuse.
 
 - nas
+  - a ZFS-based file and application server
 - www
+  - a webserver using nginx + let's encrypt to serve HTTPS
 - switch
+  - initially for juniper ex devices
+  - additional vendors and platforms are tbd
 
-## my roles
+## roles
+
+- global_handlers
+  - keep all handlers in one place
+- omada
+  - pulls/runs the container for my wifi controller
+- docker
+  - installs/configures Docker
+- ufw
+  - i'm currently using UFW to manage nftables; it doesn't play well with containers, however
+  - TODO rename to `firewall`, switch to `firewall-cmd`
 
 ## playbook overview
 
@@ -24,7 +40,11 @@ builds and configures each `machine`
 
 ```
 
-- `machines/` is the top-level directory for the semi-defined machine-level roles (i.e. db, www, nas, dns, etc)
+### provisioners
+
+- linode
+  - get account information
+  - create/delete an instance
 
 ## inventories and sources-of-truth
 

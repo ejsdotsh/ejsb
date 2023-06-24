@@ -4,3 +4,4 @@ collections:
   - name: community.general
   - name: community.docker
   - name: community.network
+  - name: linode.cloud
