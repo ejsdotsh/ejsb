@@ -13,8 +13,11 @@ VERSION := $$(<VERSION)
 UID := $$(id -u)
 GID := $$(id -g)
 NAME := ndots
+DATE := $$(date +%Y%m%d)
 BUILD_DATE := $$(date +%F)
 CURRENT_DIR := $(CURDIR)
+
+.DEFAULT_GOAL := edit
 
 ##@ General
 
@@ -75,6 +78,11 @@ pydev: nrf ## build and attach to the FastAPI+Nornir container
 		nrf bash
 
 
+.PHONY: edit
+edit: ## create a dated branch and open vscode
+	git checkout -b $(DATE)
+	code .
+
 ##@ Testing
 
 .PHONY: testall
@@ -88,3 +96,4 @@ test: ## shows the value of some variables
 	@echo ${HOME}
 	@echo ${BUILD_DATE}
 	@echo $(MAKEFILE_LIST)
+

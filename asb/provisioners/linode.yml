@@ -10,17 +10,29 @@
         - "never"
         - "linode::info"
 
-    - name: Create a linode instance
-      linode.cloud.instance:
+    - name: Get list of dns domains
+      linode.cloud.domain_list:
         api_token: "{{ vault.linode_api_token }}"
-        label: "{{ hostname | default('please-name-me') }}"
-        type: "{{ linode_instance_type | default('g6-nanode-1') }}"
-        region: "{{ linode_region | default('us-west') }}"
-        image: "linode/{{ linode_image | default('debian12') }}"
-        root_pass: "{{ vault.linode_root_pw }}"
-        authorized_keys:
-          - "{{ vault.admin_pub_sshkey }}"
-        state: present
+      tags:
+        - "never"
+        - "linode::domains"
+
+
+    - name: Create a linode instance
+      block:
+        - name: Provision instance
+          linode.cloud.instance:
+            api_token: "{{ vault.linode_api_token }}"
+            label: "{{ hostname | default('please-name-me') }}"
+            type: "{{ linode_instance_type | default('g6-nanode-1') }}"
+            region: "{{ linode_region | default('us-west') }}"
+            image: "linode/{{ linode_image | default('debian12') }}"
+            root_pass: "{{ vault.linode_root_pw }}"
+            authorized_keys:
+              - "~/.ssh/{{ ansible_user }}/id_ed25519.pub"
+              # - "{{ vault.admin_pub_sshkey }}"
+            state: present
+          register: provisioned_linodes
       tags:
         - "never"
         - "linode::provision"
