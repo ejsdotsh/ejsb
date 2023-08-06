@@ -1,0 +1,23 @@
+---
+firewall_tcp_allowed:
+  - "80"
+  - "443"
+
+# Debian dependencies
+nginx_debian_dependencies:
+  - apt-transport-https
+  - ca-certificates
+  - gpg-agent
+
+nginx_conf_path: /etc/nginx
+
+certbot_admin_email: "{{ www_admin }}"
+certbot_certs:
+  - domains: "{{ www_vhosts }}"
+
+www_vhosts:
+  - ejs.sh
+  - ejs.wtf
+  - sahala.org
+  - saha.la
+www_docroot: /srv/www
