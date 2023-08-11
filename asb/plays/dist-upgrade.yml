@@ -5,14 +5,24 @@
   gather_facts: false
 
   pre_tasks:
-    - name: Is a reboot required?
+    - name: Check if reboot required
       ansible.builtin.stat:
         path: /var/run/reboot-required
-        get_md5: false
-      notify: Server reboot
+      register: reboot_required_file
 
-    - name: Reboot the host before moving on
-      ansible.builtin.meta: flush_handlers
+    - name: Diplay variable
+      ansible.builtin.debug:
+        msg: '{{ reboot_required_file.stat.exists }}'
+
+    - name: Reboot if required
+      ansible.builtin.reboot:
+        msg: "the system is going down"
+        connect_timeout: 5
+        reboot_timeout: 600
+        pre_reboot_delay: 0
+        post_reboot_delay: 30
+        test_command: uptime
+      when: reboot_required_file.stat.exists # == true
 
         #    - name: update sources.list
         #      template:
@@ -27,15 +37,25 @@
         upgrade: dist
         force_apt_get: true
 
-    - name: Is a reboot required?
+    - name: Check if reboot required
       ansible.builtin.stat:
         path: /var/run/reboot-required
-        get_md5: false
-      register: reboot_required
-      notify: Server reboot
+      register: reboot_required_file
 
-    - name: Run the reboot handler
-      ansible.builtin.meta: flush_handlers
+    - name: Diplay variable
+      ansible.builtin.debug:
+        msg: '{{ reboot_required_file.stat.exists }}'
+
+    - name: Reboot if required
+      ansible.builtin.reboot:
+        msg: "the system is going down"
+        connect_timeout: 5
+        reboot_timeout: 600
+        pre_reboot_delay: 0
+        post_reboot_delay: 30
+        test_command: uptime
+      when: reboot_required_file.stat.exists # == true
+      register: reboot_required
 
     - name: Update cache and do 'dist-upgrade' again if rebooted
       ansible.builtin.apt:
@@ -52,14 +72,3 @@
       ansible.builtin.apt:
         autoremove: true
         purge: true
-
-  handlers:
-    - name: Server reboot
-      ansible.builtin.reboot:
-        msg: "the system is going down"
-        connect_timeout: 5
-        reboot_timeout: 600
-        pre_reboot_delay: 0
-        post_reboot_delay: 30
-        test_command: uptime
-      register: reboot_was_necessary
