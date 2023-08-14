@@ -15,9 +15,4 @@ certbot_admin_email: "{{ www_admin }}"
 certbot_certs:
   - domains: "{{ www_vhosts }}"
 
-www_vhosts:
-  - ejs.sh
-  - ejs.wtf
-  - sahala.org
-  - saha.la
 www_docroot: /srv/www

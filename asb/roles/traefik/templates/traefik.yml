@@ -1,0 +1,99 @@
+---
+################################################################
+# adapted from the configuration sample for Traefik v2.
+################################################################
+
+################################################################
+# Global configuration
+################################################################
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false
+
+# Allow backends to use insecure SSL
+serversTransport:
+  insecureSkipVerify: true
+
+################################################################
+# EntryPoints configuration
+################################################################
+
+entryPoints:
+  web:
+    address: ":{{ traefik_http_port }}"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+
+  websecure:
+    address: ":{{ traefik_https_port }}"
+    http:
+      tls:
+        certResolver: lego
+        domains:
+          - main: "{{ domain_name }}"
+            sans:
+              - "*.{{ domain_name }}"
+
+  ping:
+    address: ":{{ traefik_ui_port }}"
+
+################################################################
+# Traefik logs configuration
+################################################################
+
+log:
+  level: "{{ traefik_log_level }}"
+  filePath: "/log/traefik.log"
+  format: json
+
+################################################################
+# Access logs configuration
+################################################################
+
+accessLog:
+  filePath: "/log/traefik-access.log"
+  format: json
+
+################################################################
+# API and dashboard configuration
+################################################################
+
+api:
+  # Enable the API in insecure mode
+  insecure: true
+  dashboard: true
+
+################################################################
+# observability configuration
+################################################################
+
+ping:
+  entryPoint: ping
+  # terminatingStatusCode: 0
+
+metrics:
+  prometheus: {}
+
+################################################################
+# Docker configuration backend
+################################################################
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+
+################################################################
+# certificate resolvers
+################################################################
+
+certificatesResolvers:
+  lego:
+    acme:
+      email: "{{ domain_admin }}"
+      storage: "/letsencrypt/acme.json"
+      dnsChallenge:
+        provider: "{{ traefik_dns_provider }}"

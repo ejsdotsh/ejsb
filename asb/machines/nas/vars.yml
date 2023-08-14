@@ -1,4 +1,10 @@
 ---
+firewall_tcp_allowed:
+  - "80"
+  - "443"
+  - "8080"
+  - "8083"
+
 # vars file for machines/nas
 zfs_pool_name: pool
 zfs_pool_mount: /pool
@@ -9,5 +15,8 @@ docker_ip4_net: "{{ docker_ip4_net }}"
 docker_ip6_net: ""
 
 omada_controller_name: "{{ ap_controller_name }}"
-omada_timezone: "{{ ap_timezone }}"
+omada_timezone: "{{ unicorns_tz }}"
 
+system_timezone: "{{ unicorns_tz }}"
+
+traefik_enabled: true

@@ -7,9 +7,6 @@
 venv/
 .env
 
-# but not these files or (sub)directories
-!*/
-
 !/.dockerignore
 !/.gitignore
 !/.gitkeep
@@ -34,6 +31,7 @@ venv/
 
 # track
 !asb/**
+
 # but don't track the ansible inventory here
 asb/inventories/**
 asb/.collections/**
@@ -44,3 +42,6 @@ asb/.vp
 
 # ignore experimentation and in-progress development
 exp/**
+
+# but not these files or (sub)directories
+!*/
