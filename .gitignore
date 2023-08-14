@@ -17,14 +17,9 @@ venv/
 
 !README.md
 
-# all go
-!*.go
+# go
 !go.sum
 !go.mod
-
-# all python
-!*.py
-!*.ipynb
 
 # one document directory to consolidate them all
 !docs/**/*.md
@@ -32,16 +27,17 @@ venv/
 # track
 !asb/**
 
-# but don't track the ansible inventory here
-asb/inventories/**
-asb/.collections/**
-asb/.vp
-
 # nrf
 !nrf/**
+
+# but not these files or (sub)directories
+!*/
 
 # ignore experimentation and in-progress development
 exp/**
 
-# but not these files or (sub)directories
-!*/
+# but don't track the ansible inventory here
+asb/inventories/
+asb/.collections/
+asb/.vp
+
