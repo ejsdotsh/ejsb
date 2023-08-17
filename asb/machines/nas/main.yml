@@ -16,3 +16,5 @@
     # TODO WIP - role: bind
     - role: omada
     - role: traefik
+
+    - role: gitea

@@ -1,0 +1,23 @@
+---
+# gitea_available_externally: false
+
+# directories
+gitea_data_directory: "{{ service_dir }}/gitea"
+
+# network
+gitea_hostname: "git"
+gitea_network_name: "giteanet"
+gitea_port_http: "3001"
+gitea_port_ssh: "222"
+
+# specs
+gitea_memory: 1g
+gitea_postgres_memory: 1g
+
+# docker
+gitea_container_name: gitea
+gitea_image_name: gitea/gitea
+gitea_image_version: latest
+gitea_postgres_container_name: gitea-postgres
+gitea_postgres_image_name: postgres
+gitea_postgres_image_version: "latest"

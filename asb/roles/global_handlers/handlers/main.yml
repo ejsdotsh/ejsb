@@ -6,6 +6,9 @@
 #- import_tasks: "hostname.yml"
 
 - import_tasks: "ufw.yml"
+
 - import_tasks: "docker.yml"
 
 - import_tasks: "nginx.yml"
+
+- import_tasks: "gitea.yml"

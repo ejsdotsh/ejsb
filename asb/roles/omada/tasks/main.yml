@@ -6,6 +6,9 @@
     - name: Create omada directories
       ansible.builtin.file:
         path: "{{ service_dir }}/omada/{{ item }}"
+        owner: "{{ omada_uid }}"
+        group: "{{ omada_uid }}"
+        mode: 0775
         state: directory
         recurse: true
       with_items:

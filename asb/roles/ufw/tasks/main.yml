@@ -27,7 +27,7 @@
         port: ssh
         proto: tcp
       notify:
-        - Restart ufw
+        - Restart UFW
 
 - name: Add allowed ports and protos
   block:
@@ -48,4 +48,3 @@
       when: firewall_udp_allowed is defined
   notify:
     - Restart UFW
-

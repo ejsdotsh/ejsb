@@ -5,18 +5,22 @@ firewall_tcp_allowed:
   - "8080"
   - "8083"
 
-# vars file for machines/nas
-zfs_pool_name: pool
-zfs_pool_mount: /pool
-
+#
+# docker
+#
 docker_storage_driver: zfs
 docker_ipv6: no
 docker_ip4_net: "{{ docker_ip4_net }}"
 docker_ip6_net: ""
 
+# omada
+#
+omada_enabled: true
+omada_version: "latest"
+omada_uid: "508"
 omada_controller_name: "{{ ap_controller_name }}"
-omada_timezone: "{{ unicorns_tz }}"
-
-system_timezone: "{{ unicorns_tz }}"
+omada_timezone: "{{ system_timezone }}"
 
 traefik_enabled: true
+
+gitea_enabled: true
