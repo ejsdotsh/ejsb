@@ -1,6 +1,4 @@
 ---
-# gitea_available_externally: false
-
 # directories
 gitea_data_directory: "{{ service_dir }}/gitea"
 
