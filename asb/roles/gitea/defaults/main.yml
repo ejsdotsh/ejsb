@@ -1,6 +1,6 @@
 ---
 # directories
-gitea_data_directory: "{{ service_dir }}/gitea"
+gitea_data_directory: "{{ service_dir }}/git"
 
 # network
 gitea_hostname: "git"

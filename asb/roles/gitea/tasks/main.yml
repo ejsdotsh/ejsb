@@ -7,12 +7,15 @@
   block:
     - name: Create Gitea Directories
       ansible.builtin.file:
-        path: "{{ item }}"
+        path: "{{ gitea_data_directory }}/{{ item }}"
+        owner: "{{ gitea_uid }}"
+        group: "{{ gitea_uid }}"
+        mode: 0770
         state: directory
         recurse: yes
       with_items:
-        - "{{ gitea_data_directory }}/gitea"
-        - "{{ gitea_data_directory }}/postgres"
+        - "gitea"
+        - "postgres"
 
     - name: Create gitea network
       community.docker.docker_network:
@@ -57,9 +60,10 @@
           RUN_MODE: "prod"
           SSH_DOMAIN: "{{ gitea_hostname }}"
           SSH_PORT: "22"
-          ROOT_URL: "http://{{ gitea_hostname }}.{{ domain_name }}:{{ gitea_port_http }}/"
-          USER_UID: "996"
-          USER_GID: "996"
+          # ROOT_URL: "http://{{ gitea_hostname }}.{{ domain_name }}:{{ gitea_port_http }}/"
+          ROOT_URL: "http://{{ gitea_hostname }}:{{ gitea_port_http }}/"
+          USER_UID: "{{ gitea_uid }}"
+          USER_GID: "{{ gitea_uid }}"
         restart_policy: unless-stopped
         memory: "{{ gitea_memory }}"
         labels:

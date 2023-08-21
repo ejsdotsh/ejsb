@@ -24,3 +24,4 @@ omada_timezone: "{{ system_timezone }}"
 traefik_enabled: true
 
 gitea_enabled: true
+gitea_uid: "996"
