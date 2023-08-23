@@ -41,3 +41,8 @@ asb/inventories/
 asb/.collections/
 asb/.vp
 
+# no pyc
+__pycache__/
+
+# no logs
+logs/
