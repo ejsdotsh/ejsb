@@ -1,6 +1,6 @@
 # Ansible System Builder
 
-what began solely as a personal fork of `Ansible-NAS` to replace `FreeNAS`, has been rewritten as systems administration tooling modeled after `Ansible for DevOps` and the `DebOps` project.
+what began as a personal fork of Ansible-NAS to replace FreeNAS, is being rewritten as more general tooling to better integrate with Terraform and Packer
 
 ## machines
 
@@ -30,15 +30,7 @@ a `machine` is a playbook to build and configure coupled functions and services 
 
 - `provision.yml` imports `configure.yml` to provision and configure the given hosts
 
-```txt
-
-```
-
 - `configure.yml` imports the machine(s) to be configured and configures them
-
-```txt
-
-```
 
 ### provisioners
 

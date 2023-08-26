@@ -46,15 +46,15 @@ nrf: ## build the Nornir + FastAPI container
 		-t "ejsdotsh/nrf:${VERSION}" \
 		-t "nrf:latest" nrf
 
-.PHONY: grn
-grn: ## build the Gornir + Net/HTTP container
-	@docker build --force-rm \
-		--build-arg BUILD_DATE=${BUILD_DATE} \
-		--build-arg BUILD_VERSION=${VERSION} \
-		$(ENVFILE_PARAMS) \
-		--file grn/Dockerfile \
-		-t "ejsdotsh/grn:${VERSION}" \
-		-t "grn:latest" grn
+# .PHONY: grn
+# grn: ## build the Gornir + Net/HTTP container
+# @docker build --force-rm \
+		# --build-arg BUILD_DATE=${BUILD_DATE} \
+		# --build-arg BUILD_VERSION=${VERSION} \
+		# $(ENVFILE_PARAMS) \
+		# --file grn/Dockerfile \
+		# -t "ejsdotsh/grn:${VERSION}" \
+		# -t "grn:latest" grn
 
 
 ##@ Development
@@ -65,7 +65,7 @@ pydev: nrf ## build and attach to the FastAPI+Nornir container
 		docker network create ${NAME}; \
 	fi
 
-	@docker run -it --rm --gpus all \
+	@docker run -it --rm \
 		-h ${NAME} \
 		--net=${NAME} \
 		--name ${NAME} \

@@ -1,24 +1,19 @@
 # network development operations tooling setup (ndots)
 
-**`ndots`** is a collection of opinionated tooling and APIs that i've developed in my *homelab* to automate the build and management of (my personal) infrastructure.
+**`ndots`** is a grandiose name for the collection of learning, experimentation, and opinionated tooling that i've written to manage my personal infrastructure/aka my *homelab*.
 
-this project is as much about learning as it is about documenting what i've done and teaching/sharing knowledge.
+this project is about learning and documenting what i've done to share knowledge.
 
 ***...caution, this is a work in progress, breaking changes ahead...***
 
 ## asb
 
-- [asb](asb) - Ansible Systems Builder
-  - what began solely as a personal fork of Ansible-NAS to replace FreeNAS, has been rewritten as systems administration tooling modeled after `Ansible for DevOps` and the `DebOps` project.
+- [asb](asb) (aka Ansible Systems Builder)
+  - what began as a personal fork of Ansible-NAS to replace FreeNAS, is being rewritten as more general tooling to better integrate with Terraform and Packer
 
-## nrf and grn
+## nrf
 
-- [nrf](nrf) - Nornir + FastAPI
-- [grn](grn) - Gornir + Net/HTTP
-
-beginning with `nrf`, and then replicating to `grn`, they are both an API and a command-line tool.
-
-the initial API endpoints are:
+playing with Nornir + FastAPI to create an asynchrous network API. the initial API endpoints are:
 
 - `/devices`
   - returns a JSON list of all devices in the inventory
@@ -29,11 +24,13 @@ the initial API endpoints are:
     - `interfaces`
     - please see [getters support matrix](https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix) for the complete list
 
-the same *getters* are also available from the command line:
-
-`$ ./nrf --hostname {{hostname}} --getter {{ (facts|config|interfaces) }}`
-
 ### potential future use-cases and features
+
+- writing something similar with Gornir + Net/HTTP (and calling it `grn`)
+- a command line
+  - with the same *getters*
+
+  `$ ./nrf --hostname {{hostname}} --getter {{ (facts|config|interfaces) }}`
 
 - each API will asynchronously collect, and optionally store, *state* information from supported systems, transform it into JSON, and serve it to (RESTful?) HTTPS endpoints or CLI commands.
 - dashboards and reporting
@@ -47,12 +44,7 @@ the same *getters* are also available from the command line:
 
 ## build instructions
 
-this project uses `make` and `containers`.
-
-the first components to build are the APIs, and their associated collectors.
-
-- `make nrf` builds the Nornir + FastAPI container
-- `make grn` builds the Gornir + Net/HTTP container
+...are being rewritten
 
 ## references/inspiration
 
@@ -98,6 +90,8 @@ the first components to build are the APIs, and their associated collectors.
     > ### Speed is not a goal but a consequence
     >
 
+- [Ansible for DevOps](https://www.ansiblefordevops.com/)
+- [DebOps](https://docs.debops.org/en/stable-3.0/)
 - [JulioPDX Nornir+Fastapi](https://juliopdx.com/2021/09/01/integrating-nornir-with-fastapi/)
 - [Sebastian Ramirez](https://realpython.com/fastapi-python-web-apis/)
 - [network MOPs as automated workflows](https://www.ansible.com/blog/network-mops-as-automated-workflows)
