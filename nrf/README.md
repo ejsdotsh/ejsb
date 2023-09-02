@@ -8,6 +8,17 @@ an API and command-line tool written in Python using [Nornir](https://nornir.tec
 
 > Nornir is a pure Python automation framework intented to be used directly from Python. While most automation frameworks use their own Domain Specific Language (DSL) which you use to describe what you want to have done, Nornir lets you control everything from Python.
 
+the initial API endpoints are:
+
+- `/devices`
+  - returns a JSON list of all devices in the inventory
+- `/devices/{hostname}/getter/{getter}`
+  - returns the results of a supported `NAPALM` *getter*
+    - `facts`
+    - `config`
+    - `interfaces`
+    - please see [getters support matrix](https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix) for the complete list
+
 ## example code for supported API endpoints
 
   ```python
@@ -29,8 +40,33 @@ an API and command-line tool written in Python using [Nornir](https://nornir.tec
       return rtr.run(name=f"Get {hostname} {getter}", task=napalm_get, getters=[f"{getter}"])
   ```
 
-## TODO - data persistence
+
+## build instructions
+
+...are being rewritten
+
+## TODO 
+
+### data persistence
 
 - git
 - mongodb
 - postgresql
+
+### potential future use-cases and features
+
+- writing something similar with Gornir + Net/HTTP (and calling it `grn`)
+- a command line
+  - with the same *getters*
+
+  `$ ./nrf --hostname {{hostname}} --getter {{ (facts|config|interfaces) }}`
+
+- each API will asynchronously collect, and optionally store, *state* information from supported systems, transform it into JSON, and serve it to (RESTful?) HTTPS endpoints or CLI commands.
+- dashboards and reporting
+  - status
+  - utilization
+  - standards compliance
+  - locate a host by mac-address or IP, return (optionally change) the configuration
+- configuration backup and version control
+- configuration changes and verification
+- jupyter notebook(s) for interactive data analysis, dashboards, training and documentation, ops playbooks, and reporting
