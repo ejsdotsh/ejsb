@@ -1,8 +1,8 @@
-# network development operations tooling setup (ndots)
+# homelab
 
-**`ndots`** is a grandiose name for the collection of learning, experimentation, and opinionated tooling that i've written to manage my personal infrastructure/aka my *homelab*.
+the collection of learning, experimentation, and opinionated tooling that i write to manage my personal infrastructure, which consists of:
 
-this project is about learning and documenting what i've done to share knowledge.
+- my websites running on 
 
 ***...caution, this is a work in progress, breaking changes ahead...***
 
@@ -13,38 +13,7 @@ this project is about learning and documenting what i've done to share knowledge
 
 ## nrf
 
-playing with Nornir + FastAPI to create an asynchrous network API. the initial API endpoints are:
-
-- `/devices`
-  - returns a JSON list of all devices in the inventory
-- `/devices/{hostname}/getter/{getter}`
-  - returns the results of a supported `NAPALM` *getter*
-    - `facts`
-    - `config`
-    - `interfaces`
-    - please see [getters support matrix](https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix) for the complete list
-
-### potential future use-cases and features
-
-- writing something similar with Gornir + Net/HTTP (and calling it `grn`)
-- a command line
-  - with the same *getters*
-
-  `$ ./nrf --hostname {{hostname}} --getter {{ (facts|config|interfaces) }}`
-
-- each API will asynchronously collect, and optionally store, *state* information from supported systems, transform it into JSON, and serve it to (RESTful?) HTTPS endpoints or CLI commands.
-- dashboards and reporting
-  - status
-  - utilization
-  - standards compliance
-  - locate a host by mac-address or IP, return (optionally change) the configuration
-- configuration backup and version control
-- configuration changes and verification
-- jupyter notebook(s) for interactive data analysis, dashboards, training and documentation, ops playbooks, and reporting
-
-## build instructions
-
-...are being rewritten
+playing with Nornir + FastAPI to create an asynchrous network API.
 
 ## references/inspiration
 
