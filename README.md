@@ -1,4 +1,4 @@
-# homelab
+# homedev
 
 the collection of learning, experimentation, and opinionated tooling that i write to manage my personal infrastructure. 
 
