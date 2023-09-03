@@ -1,8 +1,6 @@
 # homelab
 
-the collection of learning, experimentation, and opinionated tooling that i write to manage my personal infrastructure, which consists of:
-
-- my websites running on 
+the collection of learning, experimentation, and opinionated tooling that i write to manage my personal infrastructure. 
 
 ***...caution, this is a work in progress, breaking changes ahead...***
 
