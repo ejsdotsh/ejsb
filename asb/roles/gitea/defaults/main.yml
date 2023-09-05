@@ -3,9 +3,7 @@
 gitea_data_directory: "{{ service_dir }}/git"
 
 # network
-gitea_hostname: "git"
-gitea_network_name: "giteanet"
-gitea_port_http: "3001"
+gitea_port_http: "3000"
 gitea_port_ssh: "222"
 
 # specs

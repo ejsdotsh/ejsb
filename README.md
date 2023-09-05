@@ -1,46 +1,20 @@
-# network development operations tooling setup (ndots)
+# ejsb - e.j.'s system builder
 
-**`ndots`** is a grandiose name for the collection of learning, experimentation, and opinionated tooling that i've written to manage my personal infrastructure/aka my *homelab*.
+what began as a personal fork of [Ansible-NAS](https://ansible-nas.io/) to replace FreeNAS, was rewritten and expanded to include other devices and services in my *homelab*.
 
-this project is about learning and documenting what i've done to share knowledge.
+**`ejsb`** is a grandiose name for the collection of learning, experimentation, and opinionated tooling that i've written to manage my personal infrastructure.  this project is about learning and documenting what i've done to share knowledge.
+
+inspired by [khuedoan/homelab](https://github.com/khuedoan/homelab), i am rewriting it again.
 
 ***...caution, this is a work in progress, breaking changes ahead...***
 
 ## asb
 
-- [asb](asb) (aka Ansible Systems Builder)
-  - what began as a personal fork of Ansible-NAS to replace FreeNAS, is being rewritten as more general tooling to better integrate with Terraform and Packer
+- [asb](asb): (aka Ansible Systems Builder)
 
 ## nrf
 
-playing with Nornir + FastAPI to create an asynchrous network API. the initial API endpoints are:
-
-- `/devices`
-  - returns a JSON list of all devices in the inventory
-- `/devices/{hostname}/getter/{getter}`
-  - returns the results of a supported `NAPALM` *getter*
-    - `facts`
-    - `config`
-    - `interfaces`
-    - please see [getters support matrix](https://napalm.readthedocs.io/en/latest/support/index.html#getters-support-matrix) for the complete list
-
-### potential future use-cases and features
-
-- writing something similar with Gornir + Net/HTTP (and calling it `grn`)
-- a command line
-  - with the same *getters*
-
-  `$ ./nrf --hostname {{hostname}} --getter {{ (facts|config|interfaces) }}`
-
-- each API will asynchronously collect, and optionally store, *state* information from supported systems, transform it into JSON, and serve it to (RESTful?) HTTPS endpoints or CLI commands.
-- dashboards and reporting
-  - status
-  - utilization
-  - standards compliance
-  - locate a host by mac-address or IP, return (optionally change) the configuration
-- configuration backup and version control
-- configuration changes and verification
-- jupyter notebook(s) for interactive data analysis, dashboards, training and documentation, ops playbooks, and reporting
+- [nrf](docs/NRF.md): playing with Nornir + FastAPI to create an asynchronous network API
 
 ## build instructions
 
@@ -90,7 +64,9 @@ playing with Nornir + FastAPI to create an asynchrous network API. the initial A
     > ### Speed is not a goal but a consequence
     >
 
-- [Ansible for DevOps](https://www.ansiblefordevops.com/)
+- [khuedoan/homelab](https://github.com/khuedoan/homelab)
+- [Ansible-NAS](https://ansible-nas.io/)
+- [Ansible for DevOps](https://github.com/geerlingguy/ansible-for-devops)
 - [DebOps](https://docs.debops.org/en/stable-3.0/)
 - [JulioPDX Nornir+Fastapi](https://juliopdx.com/2021/09/01/integrating-nornir-with-fastapi/)
 - [Sebastian Ramirez](https://realpython.com/fastapi-python-web-apis/)

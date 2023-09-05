@@ -11,8 +11,8 @@ global:
   sendAnonymousUsage: false
 
 # Allow backends to use insecure SSL
-serversTransport:
-  insecureSkipVerify: true
+# serversTransport:
+# insecureSkipVerify: true
 
 ################################################################
 # EntryPoints configuration
@@ -84,7 +84,10 @@ metrics:
 providers:
   docker:
     endpoint: "unix:///var/run/docker.sock"
-    exposedByDefault: false
+    exposedByDefault: true # force all containers to use traefik
+  http:
+    tls:
+      insecureSkipVerify: true
 
 ################################################################
 # certificate resolvers
