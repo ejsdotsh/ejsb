@@ -18,10 +18,15 @@ a `machine` is a playbook to build and configure coupled functions and services 
 
 - global_handlers
   - keep all handlers in one place
+- dns
+  - sets up an internal authoritative server for all personal domains
+    - accepts DHCP updates from the FW
+  - sets up an internal recursive server
 - omada
   - pulls/runs the container for my wifi controller
 - docker
   - installs/configures Docker
+- traefik
 - ufw
   - i'm currently using UFW to manage nftables; it doesn't play well with containers, however
   - TODO rename to `firewall`, switch to `firewall-cmd`
@@ -41,8 +46,3 @@ a `machine` is a playbook to build and configure coupled functions and services 
 ## inventories and sources-of-truth
 
 the inventory is the `source-of-truth` and ansible-like until i define yet another infrastructure data model (YAIDM?) and write the plugins to use it.
-
-## references and inspiration
-
-- [Ansible-NAS](https://ansible-nas.io/)
-- [Ansible for DevOps](https://github.com/geerlingguy/ansible-for-devops)

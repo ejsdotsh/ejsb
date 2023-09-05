@@ -58,10 +58,10 @@
           DB_USER: "gitea"
           DB_PASSWD: "{{ vault.gitea_dbpass }}"
           RUN_MODE: "prod"
-          SSH_DOMAIN: "{{ gitea_hostname }}"
+          SSH_DOMAIN: "{{ gitea_hostname }}.{{ domain_name }}"
           SSH_PORT: "22"
           # ROOT_URL: "http://{{ gitea_hostname }}.{{ domain_name }}:{{ gitea_port_http }}/"
-          ROOT_URL: "http://{{ gitea_hostname }}:{{ gitea_port_http }}/"
+          ROOT_URL: "http://{{ gitea_hostname }}.{{ domain_name }}/"
           USER_UID: "{{ gitea_uid }}"
           USER_GID: "{{ gitea_uid }}"
         restart_policy: unless-stopped

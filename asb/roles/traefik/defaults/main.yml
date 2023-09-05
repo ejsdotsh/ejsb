@@ -13,14 +13,5 @@ traefik_ui_port: "8083"
 traefik_container_name: "traefik"
 traefik_image_name: "traefik"
 traefik_image_version: "latest"
-traefik_log_level: "INFO"
-
-traefik_dns_provider: gandiv5
-traefik_environment_variables:
-  GANDIV5_API_KEY: "{{ vault.gandi_api_token }}"
-
-# traefik_acme_server: "https://acme-staging-v02.api.letsencrypt.org/directory" # staging
-traefik_acme_server: "https://acme-v02.api.letsencrypt.org/directory" # production
-
 # specs
 traefik_memory: 1g

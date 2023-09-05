@@ -1,17 +1,24 @@
-# homedev
+# ejsb - e.j.'s system builder
 
-the collection of learning, experimentation, and opinionated tooling that i write to manage my personal infrastructure. 
+what began as a personal fork of [Ansible-NAS](https://ansible-nas.io/) to replace FreeNAS, was rewritten and expanded to include other devices and services in my *homelab*.
+
+**`ejsb`** is a grandiose name for the collection of learning, experimentation, and opinionated tooling that i've written to manage my personal infrastructure.  this project is about learning and documenting what i've done to share knowledge.
+
+inspired by [khuedoan/homelab](https://github.com/khuedoan/homelab), i am rewriting it again.
 
 ***...caution, this is a work in progress, breaking changes ahead...***
 
 ## asb
 
-- [asb](asb) (aka Ansible Systems Builder)
-  - what began as a personal fork of Ansible-NAS to replace FreeNAS, is being rewritten as more general tooling to better integrate with Terraform and Packer
+- [asb](asb): (aka Ansible Systems Builder)
 
 ## nrf
 
-playing with Nornir + FastAPI to create an asynchrous network API.
+- [nrf](docs/NRF.md): playing with Nornir + FastAPI to create an asynchronous network API
+
+## build instructions
+
+...are being rewritten
 
 ## references/inspiration
 
@@ -57,7 +64,9 @@ playing with Nornir + FastAPI to create an asynchrous network API.
     > ### Speed is not a goal but a consequence
     >
 
-- [Ansible for DevOps](https://www.ansiblefordevops.com/)
+- [khuedoan/homelab](https://github.com/khuedoan/homelab)
+- [Ansible-NAS](https://ansible-nas.io/)
+- [Ansible for DevOps](https://github.com/geerlingguy/ansible-for-devops)
 - [DebOps](https://docs.debops.org/en/stable-3.0/)
 - [JulioPDX Nornir+Fastapi](https://juliopdx.com/2021/09/01/integrating-nornir-with-fastapi/)
 - [Sebastian Ramirez](https://realpython.com/fastapi-python-web-apis/)
