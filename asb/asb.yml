@@ -10,5 +10,4 @@
 
 - name: Configuration playbook
   ansible.builtin.import_playbook: configure.yml
-
 # code: language=ansible

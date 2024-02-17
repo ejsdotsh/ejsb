@@ -1,0 +1,27 @@
+---
+- name: Release upgrade
+  hosts: apt_os_all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - block:
+        - name: Update cache and upgrade
+          ansible.builtin.apt:
+            update_cache: true
+            upgrade: dist
+            force_apt_get: true
+
+        - name: Ensure update-manager-core is installed
+          ansible.builtin.apt:
+            update_cache: true
+            name: update-manager-core
+            state: present
+
+        - name: Do Release upgrade
+          ansible.builtin.command: do-release-upgrade -f DistUpgradeViewNonInteractive
+
+        - name: Reboot the server
+          ansible.builtin.reboot:
+
+      when: ansible_distribution == "Ubuntu" and ansible_distribution_version != "23.10"
