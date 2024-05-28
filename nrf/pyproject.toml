@@ -8,13 +8,14 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 nornir = "^3.3.0"
-fastapi = "^0.101.1"
+fastapi = "^0.109.1"
 uvicorn = { extras = ["standard"], version = "^0.23.2" }
 nornir-napalm = "^0.4.0"
 nornir-scrapli = "^2023.7.30"
+pip = "^24.0"
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.7.0"
+black = "^24.3.0"
 pytest = "^7.4.0"
 flake8 = "^6.1.0"
 
