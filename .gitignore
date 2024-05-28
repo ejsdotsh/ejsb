@@ -2,11 +2,6 @@
 # Ignore everything
 *
 
-# explicitly ignore
-.venv/
-venv/
-.env
-
 !/.dockerignore
 !/.gitignore
 !/.gitkeep
@@ -32,6 +27,12 @@ venv/
 
 # but not these files or (sub)directories
 !*/
+
+# explicitly ignore
+.venv/
+venv/
+.env
+**/.terraform/**
 
 # ignore experimentation and in-progress development
 exp/**
