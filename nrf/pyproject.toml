@@ -12,6 +12,7 @@ fastapi = "^0.109.1"
 uvicorn = { extras = ["standard"], version = "^0.23.2" }
 nornir-napalm = "^0.4.0"
 nornir-scrapli = "^2023.7.30"
+pip = "^24.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.7.0"
