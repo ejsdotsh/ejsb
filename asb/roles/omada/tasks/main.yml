@@ -63,7 +63,7 @@
 - name: Stop omada
   block:
     - name: Stop omada container
-      community.general.docker_container:
+      community.docker.docker_container:
         name: "{{ omada_controller_name|default('omada-controller') }}"
         state: absent
   when: omada_enabled is false

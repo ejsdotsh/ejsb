@@ -13,8 +13,8 @@
     # TODO WIP - role: docker
 
     ## services
-    # TODO WIP - role: bind
-    - role: omada
     - role: traefik
+    # TODO WIP - role: bind
 
-    - role: gitea
+    #- role: omada
+    #- role: gitea
