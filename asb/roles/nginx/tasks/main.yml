@@ -1,0 +1,95 @@
+---
+- name: Import global handlers
+  ansible.builtin.import_role:
+    name: global_handlers
+
+- name: Install and configure NGINX
+  block:
+    - name: Update cache and install needed packages
+      ansible.builtin.apt:
+        name: "{{ nginx_debian_dependencies }}"
+        update_cache: true
+        force_apt_get: true
+        state: latest
+      when: ansible_os_family == "Debian"
+
+    - name: Install nginx
+      ansible.builtin.apt:
+        name: nginx
+        force_apt_get: true
+        state: latest
+      when: ansible_os_family == "Debian"
+
+    - name: Remove default files
+      block:
+        - name: Ensure the default nginx landing page is removed
+          ansible.builtin.file:
+            path: "/var/www/"
+            state: absent
+
+        - name: Remove config files
+          ansible.builtin.file:
+            path: "{{ nginx_conf_path }}/sites-available/"
+            state: absent
+
+        - name: Remove config files
+          ansible.builtin.file:
+            path: "{{ nginx_conf_path }}/sites-enabled/"
+            state: absent
+
+        - name: Restore directories
+          ansible.builtin.file:
+            path: "{{ nginx_conf_path }}/sites-{{ item }}/"
+            state: directory
+            owner: root
+            group: root
+            mode: 0755
+          with_items:
+            - available
+            - enabled
+
+    - name: Copy configuration
+      ansible.builtin.template:
+        src: nginx.conf.j2
+        dest: "{{ nginx_conf_path }}/nginx.conf"
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Copy vhost configuration
+      block:
+        - name: Create directories
+          ansible.builtin.file:
+            path: "{{ www_docroot }}/{{ item }}"
+            state: directory
+            owner: root
+            group: "{{ ansible_user }}"
+            mode: 0775
+          with_items: "{{ www_domains }}"
+
+        - name: Copy configuration
+          ansible.builtin.template:
+            src: domain.conf.j2
+            dest: "{{ nginx_conf_path }}/sites-enabled/{{ item }}.conf"
+            owner: root
+            group: root
+            mode: 0644
+          with_items: "{{ www_domains }}"
+
+    - name: Enable service
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+      notify:
+        - Restart nginx
+  when: containerized is false
+
+# TODO - not implemented
+- name: When containerized is true
+  block:
+    - name: TODO
+      ansible.builtin.debug:
+        msg: "TODO - not implemented"
+  when: containerized is true

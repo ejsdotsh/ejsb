@@ -7,3 +7,5 @@
 - name: Set timezone to "{{ system_timezone }}"
   community.general.timezone:
     name: "{{ system_timezone |default('Etc/UTC') }}"
+
+- name: Install prerequisites
