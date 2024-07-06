@@ -39,4 +39,3 @@
         - tasksel-data
         - nano
   when: ansible_distribution == "Debian"
-    
