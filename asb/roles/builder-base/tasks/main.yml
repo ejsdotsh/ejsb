@@ -4,6 +4,39 @@
   ansible.builtin.hostname:
     name: "{{ host_name |default('INEEDANAME') }}"
 
+- name: Update /etc/hosts
+  ansible.builtin.template:
+    src: "templates/hosts.j2"
+    dest: "/etc/hosts"
+    mode: 0644
+
 - name: Set timezone to "{{ system_timezone }}"
   community.general.timezone:
     name: "{{ system_timezone |default('Etc/UTC') }}"
+
+- block:
+  - name: Install needed packages
+    ansible.builtin.apt:
+      update_cache: true
+      force_apt_get: true
+      state: "latest"
+      name:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gpg-agent
+        - python3-software-properties
+        - rsyslog
+
+  - name: Remove unneeded packages
+    ansible.builtin.apt:
+      force_apt_get: true
+      purge: true
+      state: "absent"
+      name:
+        - firmware-ath9k-htc
+        - tasksel
+        - tasksel-data
+        - nano
+  when: ansible_distribution == "Debian"
+    

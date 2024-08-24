@@ -1,0 +1,23 @@
+---
+# tasks file for k3s
+- name: Check k3s installation status
+  ansible.builtin.command: k3s --version
+  register: k3s_version_output
+  changed_when: false
+  ignore_errors: true
+
+- name: Install k3s if not installed
+  when: k3s_version_output.rc != 0
+  block:
+    - name: Download installation script
+      ansible.builtin.get_url:
+        url: https://get.k3s.io
+        timeout: 120
+        dest: /usr/local/bin/k3s-install.sh
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Run k3s installation script
+      ansible.builtin.command:
+        cmd: "/usr/local/bin/k3s-install.sh - server --cluster-init"

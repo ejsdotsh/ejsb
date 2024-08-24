@@ -18,6 +18,12 @@
         state: enabled
         policy: deny
 
+    - name: Modify ufw logging
+      ansible.builtin.lineinfile:
+        path: /etc/rsyslog.d/20-ufw.conf
+        regexp: "^#& stop"
+        line: "& stop"
+
     # TODO
     # -name: Remove existing ruleset
 

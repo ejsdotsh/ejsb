@@ -2,8 +2,8 @@
 firewall_tcp_allowed:
   - "80"
   - "443"
+  - "6443"
   - "8080"
-  - "8083"
 
 # docker
 docker_storage_driver: zfs

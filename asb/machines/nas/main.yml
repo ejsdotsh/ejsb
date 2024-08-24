@@ -8,12 +8,11 @@
   roles:
     ## required
     - role: builder-base
-    # - role: zfs
     - role: ufw
-    # TODO WIP - role: docker
+    - role: k3s
 
     ## services
-    - role: traefik
+    # - role: traefik
     # TODO WIP - role: bind
 
     #- role: omada
