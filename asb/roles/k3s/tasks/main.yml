@@ -1,5 +1,5 @@
 ---
-# tasks file for k3s
+# tasks file for k3s+cillium
 - name: Check k3s installation status
   ansible.builtin.command: k3s --version
   register: k3s_version_output
@@ -20,4 +20,42 @@
 
     - name: Run k3s installation script
       ansible.builtin.command:
-        cmd: "/usr/local/bin/k3s-install.sh - server --cluster-init"
+        argv:
+          - /usr/local/bin/k3s-install.sh -
+          - server
+          - --flannel-backend=none
+          - --disable-network-policy
+          - --disable servicelb
+          - --disable traefik
+          - --cluster-init
+
+    - name: Copy k3s config to user dir
+      ansible.builtin.copy:
+        src: /etc/rancher/k3s/k3s.yaml
+        dest: "/home/{{ admin_user }}/.kube/config"
+        owner: "{{ admin_user }}"
+        group: "{{ admin_user }}"
+        mode: '0600'
+
+- name: Check cilium installation status
+  ansible.builtin.command: cilium status
+  register: cilium_status_output
+  changed_when: false
+  ignore_errors: true
+
+- name: Install cilium if not installed
+  when: cilium_status_output.rc != 0
+  block:
+    - name: Download installation script
+      ansible.builtin.shell: |
+        CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)
+        CLI_ARCH=amd64
+        if [ "$(uname -m)" = "aarch64" ]; then CLI_ARCH=arm64; fi
+        curl -L --fail --remote-name-all https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
+        sha256sum --check cilium-linux-${CLI_ARCH}.tar.gz.sha256sum
+        sudo tar xzvfC cilium-linux-${CLI_ARCH}.tar.gz /usr/local/bin
+        rm cilium-linux-${CLI_ARCH}.tar.gz{,.sha256sum}
+
+    - name: Run the cilium installation script
+      ansible.builtin.command:
+        cmd: '/usr/local/bin/cilium install --version 1.16.1 --set=ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16"`

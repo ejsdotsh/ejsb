@@ -1,0 +1,8 @@
+# k3s-config.yaml
+flannel-backend: "none"
+disable-kube-proxy: true
+disable-network-policy: true
+cluster-init: true
+disable:
+  - servicelb
+  - traefik
