@@ -36,9 +36,9 @@ image-clean: ## maintenance command to remove intermediate containers
 
 ##@ Build
 
-.PHONY: jsonnet
-jsonnet: ## build/render the jsonnet files
-	cd jsonnet/${NAME}
+.PHONY: jsonnet-hello
+jsonnet-hello: ## build/render the jsonnet test files
+	@cd jsonnet/helloworld/ && \
 	jsonnet --ext-code-file env=dev.jsonnet --ext-str commit=$(git describe  --always --tags --long --abbrev=8) --ext-str namespace="" template.jsonnet
 
 ##@ Development
