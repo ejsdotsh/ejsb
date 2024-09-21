@@ -3,7 +3,7 @@
   local constant = import "../default-env.jsonnet",
   environment: "integration",
   kubeconfig+: default.kubeconfig + {
-    replicas: 10,
+    replicas: 5,
   },
   labels+: default.labels + {
   },

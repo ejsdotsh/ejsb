@@ -37,12 +37,12 @@ local localApp = config + environmentVars + {
 };
 
 // List of templates to generate
-local serviceHttp = (import "../generic-service.jsonnet") + {
+local serviceHttp = (import "../service-base.jsonnet") + {
   config: localApp,
   portName: "http"
 };
 
-local deployment = (import "../generic-deployment.jsonnet") + {
+local deployment = (import "../deployment-base.jsonnet") + {
   config: localApp,
 };
 
