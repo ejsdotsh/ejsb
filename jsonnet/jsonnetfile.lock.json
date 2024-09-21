@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/kube-libsonnet/kube-libsonnet.git",
+          "subdir": ""
+        }
+      },
+      "version": "ddadd28bc946a00f5ec443034a0eab1c692d539e",
+      "sum": "9vXo6EN4ikPZ+JcGqNSfSoztLjWAU7bhlOELdBu4gKM="
+    }
+  ],
+  "legacyImports": false
+}

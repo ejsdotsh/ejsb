@@ -22,8 +22,16 @@
 # track
 !asb/**
 
-# nrf
-!nrf/**
+# jsonnet
+# explicity track some vendor-ed files
+!jsonnet/vendor/**/kube.libsonnet
+!jsonnet/vendor/**/kube-platforms.libsonnet
+!jsonnet/vendor/**/utils.libsonnet
+# track the rest of our files
+!jsonnet/jsonnetfile.*
+!jsonnet/**
+# but not the rest
+jsonnet/vendor/**
 
 # but not these files or (sub)directories
 !*/
