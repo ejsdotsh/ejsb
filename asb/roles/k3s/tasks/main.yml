@@ -18,16 +18,16 @@
         group: root
         mode: 0755
 
+    - name: Copy k3s configuration file
+      ansible.builtin.copy:
+        src: templates/k3s-config.yaml
+        dest: /etc/rancher/k3s/config
+        owner: root
+        group: root
+        mode: 0755
+
     - name: Run k3s installation script
-      ansible.builtin.command:
-        argv:
-          - /usr/local/bin/k3s-install.sh -
-          - server
-          - --flannel-backend=none
-          - --disable-network-policy
-          - --disable servicelb
-          - --disable traefik
-          - --cluster-init
+      ansible.builtin.command: /usr/local/bin/k3s-install.sh
 
     - name: Copy k3s config to user dir
       ansible.builtin.copy:
@@ -35,7 +35,7 @@
         dest: "/home/{{ admin_user }}/.kube/config"
         owner: "{{ admin_user }}"
         group: "{{ admin_user }}"
-        mode: '0600'
+        mode: 0600
 
 - name: Check cilium installation status
   ansible.builtin.command: cilium status
