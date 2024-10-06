@@ -7,6 +7,8 @@
 
 - import_tasks: "ufw.yml"
 
+- import_tasks: "ssh.yml"
+
 # - import_tasks: "docker.yml"
 
 # - import_tasks: "nginx.yml"

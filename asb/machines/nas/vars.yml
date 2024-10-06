@@ -2,30 +2,27 @@
 firewall_tcp_allowed:
   - "80"
   - "443"
+  - "4244"
   - "6443"
   - "8080"
 
-# docker
-docker_storage_driver: zfs
-docker_ipv6: no
-docker_ip4_net: "{{ docker_ip4_net }}"
-docker_ip6_net: ""
+# docker has been removed
 
 # omada
 omada_enabled: true
-omada_version: "latest"
+omada_version: "latest-chromium"
 omada_uid: "508"
 omada_controller_name: "{{ ap_controller_name }}"
 omada_timezone: "{{ system_timezone }}"
 
-# traefik
-traefik_enabled: true
-traefik_log_level: "INFO"
-traefik_dns_provider: gandiv5
-traefik_environment_variables:
-  GANDIV5_API_KEY: "{{ vault.gandi_api_token }}"
+# replacing traefik with cilium
+traefik_enabled: false
+# traefik_log_level: "INFO"
+# traefik_dns_provider: gandiv5
+# traefik_environment_variables:
+#   GANDIV5_API_KEY: "{{ vault.gandi_api_token }}"
 # traefik_acme_server: "https://acme-staging-v02.api.letsencrypt.org/directory" # staging
-traefik_acme_server: "https://acme-v02.api.letsencrypt.org/directory" # production
+# traefik_acme_server: "https://acme-v02.api.letsencrypt.org/directory" # production
 
 # gitea
 gitea_enabled: true

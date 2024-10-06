@@ -14,6 +14,17 @@
   community.general.timezone:
     name: "{{ system_timezone |default('Etc/UTC') }}"
 
+- name: Harden ssh
+  ansible.builtin.template:
+    src: "templates/ssh/{{ item }}"
+    dest: "/etc/ssh/sshd_config.d/{{ item }}"
+  with_items:
+    - "01-disable-root-login.conf"
+    - "02-disable-password-auth.conf"
+    - "03-disable-challenge-response-auth.conf"
+    - "04-disable-pam.conf"
+  notify: Reload ssh
+
 - block:
   - name: Install needed packages
     ansible.builtin.apt:
@@ -27,6 +38,7 @@
         - gpg-agent
         - python3-software-properties
         - rsyslog
+        - bind9-dnsutils
 
   - name: Remove unneeded packages
     ansible.builtin.apt:

@@ -4,3 +4,6 @@ ff02::1		ip6-allnodes
 ff02::2		ip6-allrouters
 
 {{ ip4_addr }}	{{ inventory_hostname }}.{{ domain_name }}	{{ inventory_hostname }}
+{% if ip6_addr %}
+{{ ip6_addr }}	{{ inventory_hostname }}.{{ domain_name }}	{{ inventory_hostname }}
+{% endif %}

@@ -9,11 +9,8 @@
     ## required
     - role: builder-base
     - role: ufw
-    - role: k3s
+    # - role: k3s
 
     ## services
-    # - role: traefik
-    # TODO WIP - role: bind
-
     #- role: omada
     #- role: gitea
