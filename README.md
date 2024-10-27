@@ -12,10 +12,6 @@ inspired by [khuedoan/homelab](https://github.com/khuedoan/homelab), i am rewrit
 
 - [asb](asb): (aka Ansible Systems Builder)
 
-## nrf
-
-- [nrf](docs/NRF.md): playing with Nornir + FastAPI to create an asynchronous network API
-
 ## build instructions
 
 ...are being rewritten
