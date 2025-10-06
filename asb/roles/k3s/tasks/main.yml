@@ -58,4 +58,5 @@
 
     - name: Run the cilium installation script
       ansible.builtin.command:
-        cmd: '/usr/local/bin/cilium install --version 1.16.1 --set=ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16"`
+        cmd: '/usr/local/bin/cilium install --version 1.16.1 --set=ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16"'
+        # --cluster-cidr=10.42.0.0/16,2001:cafe:42::/56 --service-cidr=10.43.0.0/16,2001:cafe:43::/112
