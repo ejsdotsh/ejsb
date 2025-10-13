@@ -15,6 +15,8 @@
 # go
 !go.sum
 !go.mod
+!main.go
+!cmd/**.go
 
 # one document directory to consolidate them all
 !docs/**/*.md
@@ -24,14 +26,14 @@
 
 # jsonnet
 # explicity track some vendor-ed files
-!jsonnet/vendor/**/kube.libsonnet
-!jsonnet/vendor/**/kube-platforms.libsonnet
-!jsonnet/vendor/**/utils.libsonnet
+# !jsonnet/vendor/**/kube.libsonnet
+# !jsonnet/vendor/**/kube-platforms.libsonnet
+# !jsonnet/vendor/**/utils.libsonnet
 # track the rest of our files
-!jsonnet/jsonnetfile.*
-!jsonnet/**
+# !jsonnet/jsonnetfile.*
+# !jsonnet/**
 # but not the rest
-jsonnet/vendor/**
+# jsonnet/vendor/**
 
 # but not these files or (sub)directories
 !*/
