@@ -1,0 +1,47 @@
+- name: Setup Alpine
+  when: ansible_distribution == "Alpine"
+  block:
+    - name: Update package cache
+      community.general.apk:
+        update_cache: true
+
+    - name: Upgrade installed packages
+      community.general.apk:
+        upgrade: true
+
+    - name: Install needed packages
+      community.general.apk:
+        update_cache: true
+        state: present
+        name: audit,nftables,rsyslog,logrotate,shadow
+
+    - name: Lock unused system accounts
+      changed_when: first_boot is True
+      ansible.builtin.shell: |
+        for user in `awk -F: '($3 < 1000) {print $1}' /etc/passwd`; do
+            if [ $user != "root" ]; then
+                doas passwd -l $user
+                doas chage -E 0 $user
+            fi
+        done
+
+    - name: Update sshd_config after initial build
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        line: "{{ item.line }}"
+        regexp: "{{ item.regexp }}"
+      loop: "{{ sshd_settings }}"
+      notify: restart_sshd
+
+    - name: Update permissions on potentially sensitive files
+      ansible.builtin.file:
+        name: "{{ item.name }}"
+        mode: "{{ item.mode }}"
+      loop:
+        - { name: /root, mode: "0700" }
+        - { name: /etc/ssh/sshd_config, mode: "0600" }
+
+    # - name: Remove unneeded packages
+    #   community.general.apk:
+    #     state: absent
+    #     name:

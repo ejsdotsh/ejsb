@@ -5,7 +5,9 @@
   gather_facts: true
 
   tasks:
-    - block:
+    - name: Ubuntu release upgrade
+      when: ansible_distribution == "Ubuntu" and ansible_distribution_version != "24.04"
+      block:
         - name: Update cache and upgrade
           ansible.builtin.apt:
             update_cache: true
@@ -23,5 +25,3 @@
 
         - name: Reboot the server
           ansible.builtin.reboot:
-
-      when: ansible_distribution == "Ubuntu" and ansible_distribution_version != "24.04"

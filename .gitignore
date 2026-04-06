@@ -6,7 +6,7 @@
 !/.gitignore
 !/.gitkeep
 
-!LICENSE
+!LICENSES/*.txt
 !VERSION
 !Makefile
 
@@ -45,6 +45,7 @@ venv/
 **/.terraform/**
 
 # ignore experimentation and in-progress development
+.exp/**
 exp/**
 
 # but don't track the ansible inventory here

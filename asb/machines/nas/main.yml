@@ -8,7 +8,7 @@
   roles:
     ## required
     - role: builder-base
-    - role: ufw
+    # - role: ufw
     # - role: k3s
 
     ## services
