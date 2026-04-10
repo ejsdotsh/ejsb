@@ -8,7 +8,7 @@ SPDX-License-Identifier: MPL-2.0
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/ejsdotsh/ejsb/build.yaml?branch=main&logo=github)](https://github.com/ejsdotsh/ejsb/workflows)
 [![Latest Release](https://img.shields.io/github/v/release/ejsdotsh/ejsb?logo=github)](https://github.com/ejsdotsh/ejsb/releases)
-[![License](https://img.shields.io/github/license/ejsdotsh/ejsb?color=blue)](./LICENSES/)
+[![License](https://img.shields.io/github/license/ejsdotsh/ejsb?color=blue)](./LICENSES/MPL-2.0.txt)
 [![Contributors](https://img.shields.io/github/contributors/ejsdotsh/ejsb?logo=github)](https://github.com/ejsdotsh/ejsb/graphs/contributors)
 
 > `ejsb` is a grandiose name for a simple command-line tool for ad-hoc management of my personal infrastructure.
