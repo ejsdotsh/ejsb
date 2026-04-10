@@ -1,26 +1,36 @@
 # ejsb - e.j.'s system builder
 
-what began as a personal fork of [Ansible-NAS](https://ansible-nas.io/) to replace FreeNAS, became an ad-hoc collection of learning, experimentation, and opinionated tooling that i've written to manage my personal infrastructure.
+[![Build Status](https://img.shields.io/github/actions/workflow/status/ejsdotsh/ejsb/build.yaml?branch=main&logo=github)](https://github.com/ejsdotsh/ejsb/workflows)
+[![Latest Release](https://img.shields.io/github/v/release/ejsdotsh/ejsb?logo=github)](https://github.com/ejsdotsh/ejsb/releases)
+[![License](https://img.shields.io/github/license/ejsdotsh/ejsb?color=blue)](./LICENSES/)
+[![Contributors](https://img.shields.io/github/contributors/ejsdotsh/ejsb?logo=github)](https://github.com/ejsdotsh/ejsb/graphs/contributors)
 
-this project is about learning and documenting what i've done to share knowledge.
+> `ejsb` is a grandiose name for a simple command-line tool for ad-hoc management of my personal infrastructure.
 
-inspired by [khuedoan/homelab](https://github.com/khuedoan/homelab), i am rewriting it again.
+## Description
+
+What began as a personal fork of [Ansible-NAS](https://ansible-nas.io/) to replace FreeNAS, became an ad-hoc collection of learning, experimentation, and opinionated tooling that i've written to manage my personal infrastructure. This project is about learning and documenting what i've done to share knowledge.
 
 ***...caution, this is a work in progress, breaking changes ahead...***
 
-## asb
+### ejsb
 
-- [asb](asb): (aka Ansible Systems Builder)
+- a simple command-line tool written in Go, using Cobra, Viper, and Go-Resty
 
-## nrf
+### asb
 
-- [nrf](docs/NRF.md): playing with Nornir + FastAPI to create an asynchronous network API
+- [asb](asb): various Ansible playbooks and roles
 
-## build instructions
+### nrf
 
-...are being rewritten
+- [nrf](nrf/README.md): playing with Nornir + FastAPI
 
-## references/inspiration
+## Requirements
+
+- Go
+- Python
+
+## Acknowledgements
 
 - from Dave Barroso's most-excellent [Building Scalable Tooling](https://www.dravetech.com/presos/building_scalable_tooling/slides.html) presentation (*emphasis mine*):
 
@@ -66,7 +76,11 @@ inspired by [khuedoan/homelab](https://github.com/khuedoan/homelab), i am rewrit
 - [Ansible-NAS](https://ansible-nas.io/)
 - [Ansible for DevOps](https://github.com/geerlingguy/ansible-for-devops)
 - [DebOps](https://docs.debops.org/en/stable-3.0/)
-- [JulioPDX Nornir+Fastapi](https://juliopdx.com/2021/09/01/integrating-nornir-with-fastapi/)
-- [Sebastian Ramirez](https://realpython.com/fastapi-python-web-apis/)
-- [network MOPs as automated workflows](https://www.ansible.com/blog/network-mops-as-automated-workflows)
-- [how to build a network automation stack with nornir, napalm, and netbox](https://www.packetcoders.io/how-to-build-a-network-automation-stack-with-nornir-napalm-and-netbox/)
+
+## License
+
+This project is licensed under the Apache-2.0 and MPL-2.0 Licenses — see the LICENSE files for details.
+
+<div align="center">
+Made with ❤️ by e.j. sahala
+</div>

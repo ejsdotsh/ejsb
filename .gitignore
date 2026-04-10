@@ -23,17 +23,7 @@
 
 # track
 !asb/**
-
-# jsonnet
-# explicity track some vendor-ed files
-# !jsonnet/vendor/**/kube.libsonnet
-# !jsonnet/vendor/**/kube-platforms.libsonnet
-# !jsonnet/vendor/**/utils.libsonnet
-# track the rest of our files
-# !jsonnet/jsonnetfile.*
-# !jsonnet/**
-# but not the rest
-# jsonnet/vendor/**
+!nrf/**
 
 # but not these files or (sub)directories
 !*/
@@ -42,13 +32,12 @@
 .venv/
 venv/
 .env
-**/.terraform/**
 
 # ignore experimentation and in-progress development
 .exp/**
 exp/**
 
-# but don't track the ansible inventory here
+# don't track the ansible inventory here
 asb/inventories/
 asb/.collections/
 asb/.vp
