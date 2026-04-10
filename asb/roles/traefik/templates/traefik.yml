@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 ---
 ################################################################
 # adapted from the configuration sample for Traefik v2.

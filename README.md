@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+
+SPDX-License-Identifier: MPL-2.0
+-->
+
 # ejsb - e.j.'s system builder
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/ejsdotsh/ejsb/build.yaml?branch=main&logo=github)](https://github.com/ejsdotsh/ejsb/workflows)

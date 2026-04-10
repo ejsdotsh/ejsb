@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 - name: Install Junos OS
   hosts: junos_all
   connection: ansible.netcommon.netconf

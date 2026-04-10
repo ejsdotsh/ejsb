@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+
+SPDX-License-Identifier: MPL-2.0
+-->
+
 # Ansible System Builder
 
 what began as a personal fork of Ansible-NAS to replace FreeNAS, is being rewritten as more general tooling to better integrate with Terraform and Packer

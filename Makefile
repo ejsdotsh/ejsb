@@ -1,5 +1,9 @@
 #!/usr/bin/make -f
 
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 SHELL := /bin/bash
 
 # https://lithic.tech/blog/2020-05/makefile-dot-env/

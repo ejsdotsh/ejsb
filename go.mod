@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 module github.com/ejsdotsh/ejsb
 
 go 1.25.2

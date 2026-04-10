@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 [tool.poetry]
 name = "nrf"
 version = "0.0.1"
