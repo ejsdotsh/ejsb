@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
+---
+- name: Include OS-specific variables
+  ansible.builtin.include_vars: "{{ ansible_os_family|lower }}.yml"
+
+- name: Include OS-specific tasks
+  ansible.builtin.include_tasks: "{{ ansible_os_family|lower }}-tasks.yml"
+
+- name: Extra setup for non-Alpine distros
+  when: ansible_distribution != "Alpine"
+  block:
+    - name: Set hostname to "{{ host_name }}"
+      ansible.builtin.hostname:
+        name: "{{ host_name |default('INEEDANAME') }}"
+
+    - name: Update /etc/hosts
+      ansible.builtin.template:
+        src: "templates/hosts.j2"
+        dest: "/etc/hosts"
+        mode: "0644"
+
+    - name: Set timezone to "{{ system_timezone }}"
+      community.general.timezone:
+        name: "{{ system_timezone |default('Etc/UTC') }}"
+
+# replace with lineinfile tasks
+# - name: Harden ssh
+#   ansible.builtin.template:
+#     src: "templates/ssh/{{ item }}"
+#     dest: "/etc/ssh/sshd_config.d/{{ item }}"
+#   with_items:
+#     - "01-disable-root-login.conf"
+#     - "02-disable-password-auth.conf"
+#     - "03-disable-challenge-response-auth.conf"
+#     - "04-disable-pam.conf"
+#   notify: Reload ssh

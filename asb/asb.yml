@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 ---
 - name: Update hosts
   ansible.builtin.import_playbook: plays/dist-upgrade.yml

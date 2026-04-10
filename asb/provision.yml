@@ -1,7 +1,12 @@
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 ---
 # uncomment the provisioner to use
 #
-- import_playbook: provisioners/linode.yml
+- name: Provisioners
+  import_playbook: provisioners/linode.yml
 
 # - name: Configure the provisioned servers
   # ansible.builtin.import_playbook: configure.yml

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 ---
 - name: Dist upgrade
   hosts: apt_os_all
@@ -10,7 +14,7 @@
         path: /var/run/reboot-required
       register: reboot_required_file
 
-    - name: Diplay variable
+    - name: Display variable
       ansible.builtin.debug:
         msg: "{{ reboot_required_file.stat.exists }}"
 
@@ -44,7 +48,7 @@
         path: /var/run/reboot-required
       register: reboot_required_file
 
-    - name: Diplay variable
+    - name: Display variable
       ansible.builtin.debug:
         msg: "{{ reboot_required_file.stat.exists }}"
 

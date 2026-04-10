@@ -1,5 +1,9 @@
 #!/usr/bin/make -f
 
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 SHELL := /bin/bash
 
 # https://lithic.tech/blog/2020-05/makefile-dot-env/
@@ -12,7 +16,7 @@ endif
 VERSION := $$(<VERSION)
 UID := $$(id -u)
 GID := $$(id -g)
-NAME := ndots
+NAME := ejsb
 DATE := $$(date +%Y%m%d)
 BUILD_DATE := $$(date +%F)
 CURRENT_DIR := $(CURDIR)
@@ -31,57 +35,19 @@ help: ## display this help message
 
 .PHONY: image-clean
 image-clean: ## maintenance command to remove intermediate containers
-	@docker rmi $$(docker images -f "dangling=true" -q)
-
+	@podman rmi $$(podman images -f "dangling=true" -q)
 
 ##@ Build
 
-.PHONY: nrf
-nrf: ## build the Nornir + FastAPI container
-	@docker build --force-rm \
-		--build-arg BUILD_DATE=${BUILD_DATE} \
-		--build-arg BUILD_VERSION=${VERSION} \
-		$(ENVFILE_PARAMS) \
-		--file nrf/Dockerfile \
-		-t "ejsdotsh/nrf:${VERSION}" \
-		-t "nrf:latest" nrf
-
-# .PHONY: grn
-# grn: ## build the Gornir + Net/HTTP container
-# @docker build --force-rm \
-		# --build-arg BUILD_DATE=${BUILD_DATE} \
-		# --build-arg BUILD_VERSION=${VERSION} \
-		# $(ENVFILE_PARAMS) \
-		# --file grn/Dockerfile \
-		# -t "ejsdotsh/grn:${VERSION}" \
-		# -t "grn:latest" grn
-
+.PHONY: build
+build: ## this hasn't been implemented yet
+	@echo "this hasn't been implemented yet"
 
 ##@ Development
-
-.PHONY: pydev
-pydev: nrf ## build and attach to the FastAPI+Nornir container
-	@if [ -z $$(docker network ls -q -f name=${NAME}) ]; then \
-		docker network create ${NAME}; \
-	fi
-
-	@docker run -it --rm \
-		-h ${NAME} \
-		--net=${NAME} \
-		--name ${NAME} \
-		--mount type=bind,src="${CURRENT_DIR}"/inventories,dst=/srv/nrf/inventories \
-		--mount type=bind,src="${CURRENT_DIR}"/conf,dst=/srv/nrf/nr_data \
-		--mount type=bind,src="${CURRENT_DIR}"/logs,dst=/srv/nrf/logs \
-		--mount type=bind,src="${HOME}"/.ssh/"${ADMIN_USER}",dst=/srv/nrf/.ssh \
-		--publish 8080:8080 \
-		-w /srv/nrf \
-		nrf bash
-
 
 .PHONY: edit
 edit: ## create a dated branch and open vscode
 	git checkout -b $(DATE)
-	code .
 
 ##@ Testing
 

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 # modified Allowlisting gitignore
 # Ignore everything
 *
@@ -6,7 +10,7 @@
 !/.gitignore
 !/.gitkeep
 
-!LICENSE
+!LICENSES/*.txt
 !VERSION
 !Makefile
 
@@ -15,14 +19,14 @@
 # go
 !go.sum
 !go.mod
+!main.go
+!cmd/**.go
 
 # one document directory to consolidate them all
 !docs/**/*.md
 
 # track
 !asb/**
-
-# nrf
 !nrf/**
 
 # but not these files or (sub)directories
@@ -32,12 +36,12 @@
 .venv/
 venv/
 .env
-**/.terraform/**
 
 # ignore experimentation and in-progress development
+.exp/**
 exp/**
 
-# but don't track the ansible inventory here
+# don't track the ansible inventory here
 asb/inventories/
 asb/.collections/
 asb/.vp

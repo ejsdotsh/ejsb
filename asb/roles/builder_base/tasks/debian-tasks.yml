@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
+- name: Setup Debian
+  when: ansible_distribution == "Debian"
+  block:
+    - name: Install needed packages
+      ansible.builtin.apt:
+        update_cache: true
+        force_apt_get: true
+        state: "present"
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gpg-agent
+          - python3-software-properties
+          - rsyslog
+          - bind9-dnsutils
+
+    - name: Remove unneeded packages
+      ansible.builtin.apt:
+        force_apt_get: true
+        purge: true
+        state: "absent"
+        name:
+          - firmware-ath9k-htc
+          - tasksel
+          - tasksel-data
+          - nano

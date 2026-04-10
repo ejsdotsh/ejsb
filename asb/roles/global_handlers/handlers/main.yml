@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 ---
 # import all of the handlers: order determines execution order
 
@@ -6,6 +10,8 @@
 #- import_tasks: "hostname.yml"
 
 - import_tasks: "ufw.yml"
+
+- import_tasks: "ssh.yml"
 
 # - import_tasks: "docker.yml"
 

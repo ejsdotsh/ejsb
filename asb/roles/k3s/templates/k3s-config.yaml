@@ -1,8 +1,17 @@
-# k3s-config.yaml
-flannel-backend: "none"
+# SPDX-FileCopyrightText: 2020-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
+---
+# /etc/rancher/k3s/config.yaml
+node-ip: {{ ip4_addr }},{{ ip6_addr }}
+cluster-cidr: 10.42.0.0/16,2001:cafe:42::/56
+service-cidr: 10.43.0.0/16,2001:cafe:43::/112
+flannel-backend: none
 disable-kube-proxy: true
 disable-network-policy: true
 cluster-init: true
 disable:
   - servicelb
   - traefik
+default-local-storage-path: /var/lib/rancher/k3s/storage

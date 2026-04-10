@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2022-Present j. e.j. sahala <git@ejs.sh>
+#
+# SPDX-License-Identifier: MPL-2.0
+
+---
+inventory:
+  plugin: YAMLInventory
+  options:
+    host_file: "config/hosts.yml"
+    group_file: "config/groups.yml"
+    defaults_file: "config/defaults.yml"
+
+runner:
+  plugin: threaded
+  options:
+    num_workers: 10
+
+logging:
+  log_file: "logs/nornir.log"
