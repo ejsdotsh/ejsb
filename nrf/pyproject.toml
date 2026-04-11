@@ -10,7 +10,7 @@ authors = ["e.j. (they/them) <git@ejs.sh>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.13"
 nornir = "^3.3.0"
 fastapi = "^0.109.1"
 uvicorn = { extras = ["standard"], version = "^0.23.2" }
@@ -19,10 +19,19 @@ nornir-scrapli = "^2023.7.30"
 pip = "^24.0"
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.3.0"
+black = "^26.3.0"
 pytest = "^7.4.0"
 flake8 = "^6.1.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tool.pixi.pypi-dependencies]
+nrf = { path = ".", editable = true }
+
+[tool.pixi.tasks]
