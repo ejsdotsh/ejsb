@@ -27,10 +27,6 @@ What began as a personal fork of [Ansible-NAS](https://ansible-nas.io/) to repla
 
 - [asb](asb): various Ansible playbooks and roles
 
-### nrf
-
-- [nrf](nrf/README.md): playing with Nornir + FastAPI
-
 ## Requirements
 
 - Go
